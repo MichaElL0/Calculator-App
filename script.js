@@ -34,6 +34,9 @@ function operate(_operator, _num1, _num2) {
     }
 }
 
+let cos = "1.4";
+
+
 
 
 

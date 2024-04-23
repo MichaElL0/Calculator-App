@@ -1,0 +1,25 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: aliceblue;
+}
+
+.button {
+    padding: 15px;
+    font-size: 20px;
+    background-color: lightblue;
+}
+
+.button:hover {
+    background-color: rgb(123, 166, 182);
+    font-weight: 600;
+}
+
+.button:active {
+    box-shadow: 2px 2px rgb(80, 107, 117);
+}
