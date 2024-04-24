@@ -34,15 +34,6 @@ body {
     gap: 1px;
 }
 
-
-
-input {
-    width: 100%;
-    font-size: 100px;
-    background-color: lightskyblue;
-    text-align: right;
-}
-
 .display {
     width: 100%;
     height: 100px;
