@@ -64,17 +64,14 @@ input {
 
 .button {
     padding: 15px;
-    font-size: 20px;
+    font-size: 35px;
     background-color: lightblue;
     box-shadow: none;
     border: none;
     height: 100px;
     width: 100px;
 
-    display: flex;
-    flex: auto;
-    align-items: center;
-    justify-content: center;
+    flex: 1 1 auto;
     
 }
 
