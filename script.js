@@ -93,7 +93,7 @@ equals.addEventListener("click", event => {
         return;
     }
 
-    displayValue = operate(operator, number1, number2)
+    displayValue = operate(operator, number1, number2).toFixed(9);
     display.textContent = displayValue;
     number1 = displayValue;
     console.log("Display value: " + displayValue);
