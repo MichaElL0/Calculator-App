@@ -45,6 +45,7 @@ function resetDisplay() {
     displayValue = "";
 }
 
+//Make digit buttons work
 buttons.forEach(item => {
     item.addEventListener("click", event => {
         if(displayValue.length >= 10) {
@@ -75,8 +76,7 @@ operators.forEach(item => {
     item.addEventListener("click", event => {
         operator = event.target.textContent;
         number1 = parseFloat(displayValue);
-        resetDisplay();
-        //alert(operator);
+        displayValue = "";
     });
 });
 
@@ -85,6 +85,16 @@ operators.forEach(item => {
 const equals = document.querySelector("#equals");
 equals.addEventListener("click", event => {
     number2 = parseFloat(displayValue);
-    resetDisplay();
-    display.textContent = operate(operator, number1, number2);
+    //resetDisplay();
+
+    if(number1 == 0 || number2 == 0 && operator == "/") {
+        alert("Don't break me... :(");
+        resetDisplay();
+        return;
+    }
+
+    displayValue = operate(operator, number1, number2)
+    display.textContent = displayValue;
+    number1 = displayValue;
+    console.log("Display value: " + displayValue);
 });
