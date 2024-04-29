@@ -48,11 +48,12 @@ function resetDisplay() {
 //Make digit buttons work
 buttons.forEach(item => {
     item.addEventListener("click", event => {
-        if(displayValue.length >= 10) {
+        if(displayValue.length >= 9) {
             return;
         }
         else {
             display.textContent = "";
+            displayValue = "";
             displayValue += event.target.textContent;
             display.textContent = displayValue;
         }
@@ -75,7 +76,14 @@ const operators = document.querySelectorAll(".operator");
 operators.forEach(item => {
     item.addEventListener("click", event => {
         operator = event.target.textContent;
-        number1 = parseFloat(displayValue);
+        if(displayValue.toString().length >= 9) {
+            number1 = parseFloat(displayValue).toFixed(8);
+        }
+        else {
+            number1 = parseFloat(displayValue);
+    
+        }
+        
         displayValue = "";
     });
 });
@@ -85,16 +93,36 @@ operators.forEach(item => {
 const equals = document.querySelector("#equals");
 equals.addEventListener("click", event => {
     number2 = parseFloat(displayValue);
-    //resetDisplay();
-
-    if(number1 == 0 || number2 == 0 && operator == "/") {
+    console.log(number2);
+    
+    if((number1 == 0 || number2 == 0) && operator == "/") {
         alert("Don't break me... :(");
         resetDisplay();
         return;
     }
+    else if(operator == "") {
+        console.log("shit");
+        return;
+    }
 
-    displayValue = operate(operator, number1, number2).toFixed(9);
-    display.textContent = displayValue;
+    displayValue = operate(operator, number1, number2);
+
+    if(displayValue.toString().length >= 9) {
+        console.log(true);
+        console.log(displayValue);
+        display.textContent = parseFloat(displayValue).toFixed(8);
+    }
+    else {
+        //display.textContent = displayValue;
+        console.log("Normal output");
+
+    }
+    // console.log(number1);
+    // console.log(number2);
+    // console.log(operator);
+    // console.log("");
+    // console.log(displayValue);
+    // console.log("----------");
+
     number1 = displayValue;
-    console.log("Display value: " + displayValue);
 });
