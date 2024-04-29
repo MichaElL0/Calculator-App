@@ -85,7 +85,6 @@ operators.forEach(item => {
 //Make equals button work
 const equals = document.querySelector("#equals");
 
-
 equals.addEventListener("click", event => {
     number2 = parseFloat(Math.trunc(displayValue*100000000)/100000000);
     
@@ -106,14 +105,15 @@ equals.addEventListener("click", event => {
         console.log(displayValue);
         display.textContent = Math.trunc(displayValue*100000000)/100000000;
         number1 = displayValue;
-        return;
+        //displayValue = "";
     }
     else {
         display.textContent = displayValue;
         console.log(displayValue);
         console.log("Normal output");
         number1 = displayValue;
+        //displayValue = "";
     }
 
-    displayValue = "";
+    display.textContent = displayValue;
 });
