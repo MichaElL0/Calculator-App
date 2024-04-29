@@ -100,20 +100,24 @@ equals.addEventListener("click", event => {
 
     displayValue = operate(operator, number1, number2);
 
-    if(displayValue.toString().length >= 9) {
-        console.log(true);
-        console.log(displayValue);
-        display.textContent = Math.trunc(displayValue*100000000)/100000000;
-        number1 = displayValue;
-        //displayValue = "";
-    }
-    else {
-        display.textContent = displayValue;
-        console.log(displayValue);
-        console.log("Normal output");
-        number1 = displayValue;
-        //displayValue = "";
-    }
+    // if(displayValue.toString().length >= 9) {
+    //     console.log(true);
+    //     console.log(displayValue);
+    //     display.textContent = Math.trunc(displayValue*100000000)/100000000;
+    //     number1 = displayValue;
+    // }
+    // else {
+    //     display.textContent = displayValue;
+    //     console.log(displayValue);
+    //     console.log("Normal output");
+    //     number1 = displayValue;
+    // }
 
     display.textContent = displayValue;
+    console.log(displayValue);
+    console.log("Normal output");
+    number1 = displayValue;
+
+    display.textContent = Math.trunc(displayValue*100000000)/100000000;
+    //displayValue = "";
 });
