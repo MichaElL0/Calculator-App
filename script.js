@@ -53,7 +53,7 @@ buttons.forEach(item => {
         }
         else {
             display.textContent = "";
-            displayValue = "";
+            //displayValue = "";
             displayValue += event.target.textContent;
             display.textContent = displayValue;
         }
@@ -76,9 +76,7 @@ const operators = document.querySelectorAll(".operator");
 operators.forEach(item => {
     item.addEventListener("click", event => {
         operator = event.target.textContent;
-
         number1 = parseFloat(Math.trunc(displayValue*100000000)/100000000);
-        
         displayValue = "";
     });
 });
@@ -86,9 +84,10 @@ operators.forEach(item => {
 
 //Make equals button work
 const equals = document.querySelector("#equals");
+
+
 equals.addEventListener("click", event => {
-    number2 = parseFloat(displayValue);
-    //console.log(number2);
+    number2 = parseFloat(Math.trunc(displayValue*100000000)/100000000);
     
     if((number1 == 0 || number2 == 0) && operator == "/") {
         alert("Don't break me... :(");
@@ -106,20 +105,15 @@ equals.addEventListener("click", event => {
         console.log(true);
         console.log(displayValue);
         display.textContent = Math.trunc(displayValue*100000000)/100000000;
+        number1 = displayValue;
         return;
     }
     else {
-        //display.textContent = displayValue;
+        display.textContent = displayValue;
         console.log(displayValue);
         console.log("Normal output");
-
+        number1 = displayValue;
     }
-    // console.log(number1);
-    // console.log(number2);
-    // console.log(operator);
-    // console.log("");
-    // console.log(displayValue);
-    // console.log("----------");
 
-    number1 = displayValue;
+    displayValue = "";
 });
