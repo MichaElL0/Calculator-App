@@ -97,8 +97,8 @@ equals.addEventListener("click", event => {
         return;
     }
 
-    displayValue = operate(operator, number1, number2);
-    display.textContent = Math.trunc(displayValue*100000000)/100000000;
+    displayValue = Math.trunc(operate(operator, number1, number2)*100000000)/100000000; ;
+    display.textContent = displayValue;//Math.trunc(displayValue*100000000)/100000000;
 
     // if(displayValue.toString().length >= 9) {
     //     console.log(true);
@@ -116,7 +116,7 @@ equals.addEventListener("click", event => {
     //display.textContent = displayValue;
     // console.log(displayValue);
     // console.log("Normal output");
-    number1 = displayValue;
+    number1 = Math.trunc(displayValue*100000000)/100000000;
 
     displayValue = "";
 });
