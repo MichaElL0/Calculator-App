@@ -53,7 +53,6 @@ buttons.forEach(item => {
         }
         else {
             display.textContent = "";
-            //displayValue = "";
             displayValue += event.target.textContent;
             display.textContent = displayValue;
         }
@@ -99,6 +98,7 @@ equals.addEventListener("click", event => {
     }
 
     displayValue = operate(operator, number1, number2);
+    display.textContent = Math.trunc(displayValue*100000000)/100000000;
 
     // if(displayValue.toString().length >= 9) {
     //     console.log(true);
@@ -113,11 +113,10 @@ equals.addEventListener("click", event => {
     //     number1 = displayValue;
     // }
 
-    display.textContent = displayValue;
-    console.log(displayValue);
-    console.log("Normal output");
+    //display.textContent = displayValue;
+    // console.log(displayValue);
+    // console.log("Normal output");
     number1 = displayValue;
 
-    display.textContent = Math.trunc(displayValue*100000000)/100000000;
-    //displayValue = "";
+    displayValue = "";
 });
