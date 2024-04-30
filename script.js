@@ -120,3 +120,12 @@ equals.addEventListener("click", event => {
 
     displayValue = "";
 });
+
+const calculator = document.querySelector(".calculator");
+
+document.body.addEventListener("mousemove", event => {
+    let xAxis = event.pageX * 0.02;
+    let yAxis = event.pageY * 0.02;
+
+    calculator.style.boxShadow = `${xAxis}px ${yAxis}px #c481c0`;
+});
