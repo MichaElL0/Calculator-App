@@ -53,7 +53,6 @@ buttons.forEach(item => {
         }
         else {
             display.textContent = "";
-            displayValue = "";
             displayValue += event.target.textContent;
             display.textContent = displayValue;
         }
@@ -76,14 +75,7 @@ const operators = document.querySelectorAll(".operator");
 operators.forEach(item => {
     item.addEventListener("click", event => {
         operator = event.target.textContent;
-        if(displayValue.toString().length >= 9) {
-            number1 = parseFloat(displayValue).toFixed(8);
-        }
-        else {
-            number1 = parseFloat(displayValue);
-    
-        }
-        
+        number1 = parseFloat(Math.trunc(displayValue*100000000)/100000000);
         displayValue = "";
     });
 });
@@ -91,9 +83,9 @@ operators.forEach(item => {
 
 //Make equals button work
 const equals = document.querySelector("#equals");
+
 equals.addEventListener("click", event => {
-    number2 = parseFloat(displayValue);
-    console.log(number2);
+    number2 = parseFloat(Math.trunc(displayValue*100000000)/100000000);
     
     if((number1 == 0 || number2 == 0) && operator == "/") {
         alert("Don't break me... :(");
@@ -105,24 +97,35 @@ equals.addEventListener("click", event => {
         return;
     }
 
-    displayValue = operate(operator, number1, number2);
+    displayValue = Math.trunc(operate(operator, number1, number2)*100000000)/100000000; ;
+    display.textContent = displayValue;//Math.trunc(displayValue*100000000)/100000000;
 
-    if(displayValue.toString().length >= 9) {
-        console.log(true);
-        console.log(displayValue);
-        display.textContent = parseFloat(displayValue).toFixed(8);
-    }
-    else {
-        //display.textContent = displayValue;
-        console.log("Normal output");
+    // if(displayValue.toString().length >= 9) {
+    //     console.log(true);
+    //     console.log(displayValue);
+    //     display.textContent = Math.trunc(displayValue*100000000)/100000000;
+    //     number1 = displayValue;
+    // }
+    // else {
+    //     display.textContent = displayValue;
+    //     console.log(displayValue);
+    //     console.log("Normal output");
+    //     number1 = displayValue;
+    // }
 
-    }
-    // console.log(number1);
-    // console.log(number2);
-    // console.log(operator);
-    // console.log("");
+    //display.textContent = displayValue;
     // console.log(displayValue);
-    // console.log("----------");
+    // console.log("Normal output");
+    number1 = Math.trunc(displayValue*100000000)/100000000;
 
-    number1 = displayValue;
+    displayValue = "";
+});
+
+const calculator = document.querySelector(".calculator");
+
+document.body.addEventListener("mousemove", event => {
+    let xAxis = event.pageX * 0.02;
+    let yAxis = event.pageY * 0.02;
+
+    calculator.style.boxShadow = `${xAxis}px ${yAxis}px #c481c0`;
 });
