@@ -76,8 +76,13 @@ const operators = document.querySelectorAll(".operator");
 operators.forEach(item => {
     item.addEventListener("click", event => {
         operator = event.target.textContent;
-
-        number1 = parseFloat(Math.trunc(displayValue*100000000)/100000000);
+        if(displayValue.toString().length >= 9) {
+            number1 = parseFloat(displayValue).toFixed(8);
+        }
+        else {
+            number1 = parseFloat(displayValue);
+    
+        }
         
         displayValue = "";
     });
@@ -88,7 +93,7 @@ operators.forEach(item => {
 const equals = document.querySelector("#equals");
 equals.addEventListener("click", event => {
     number2 = parseFloat(displayValue);
-    //console.log(number2);
+    console.log(number2);
     
     if((number1 == 0 || number2 == 0) && operator == "/") {
         alert("Don't break me... :(");
@@ -105,12 +110,10 @@ equals.addEventListener("click", event => {
     if(displayValue.toString().length >= 9) {
         console.log(true);
         console.log(displayValue);
-        display.textContent = Math.trunc(displayValue*100000000)/100000000;
-        return;
+        display.textContent = parseFloat(displayValue).toFixed(8);
     }
     else {
         //display.textContent = displayValue;
-        console.log(displayValue);
         console.log("Normal output");
 
     }
