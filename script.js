@@ -121,8 +121,8 @@ equals.addEventListener("click", event => {
     displayValue = "";
 });
 
+//Make box shadow effect
 const calculator = document.querySelector(".calculator");
-
 document.body.addEventListener("mousemove", event => {
     let xAxis = event.pageX * 0.02;
     let yAxis = event.pageY * 0.02;
