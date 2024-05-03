@@ -50,52 +50,16 @@ function resetDisplay() {
     displayValue = "";
 }
 
-//Make digit buttons work
-// buttons.forEach(item => {
-//     item.addEventListener("click", event => {
-//         //Removes default zero
-//         display.textContent = display.textContent.replace("0", "");
-//         if(display.textContent.length <= 8) {
-//             display.textContent += event.target.textContent;
-//         }
-//     });
-// });
-
-
-// //Make operator buttons work
-// operators.forEach(item => {
-//     item.addEventListener("click", event => {
-//         operator = event.target.textContent;
-//         number1 = parseFloat(display.textContent);
-//         display.textContent = "0";
-//     });
-// });
-
-// //Make equals button work
-// equals.addEventListener("click", event => {
-//     number2 = parseFloat(display.textContent);
-    
-//     console.log(number1);
-//     console.log(number2);
-
-//     console.log(operate(operator, number1, number2));
-// });
-
-// //Make clear button work
-// clear.addEventListener("click", event => {
-//     number1 = 0;
-//     number2 = 0;
-//     operator = "";
-//     //resetDisplay();
-// });
-
 everyButton.forEach(item => {
     item.addEventListener("click", event => {
         if(event.target.classList.contains("digit")) {
-            display.textContent = curNumber;
-            display.textContent += event.target.textContent;
-            curNumber += event.target.textContent;
-            console.log(curNumber);
+            if(display.textContent.length <= 9) {
+                display.textContent = curNumber;
+                display.textContent += event.target.textContent;
+                curNumber += event.target.textContent;
+                console.log(curNumber);
+            }
+            
         }
         else if(event.target.classList.contains("operator")) {
             //display.textContent = parseFloat(curNumber);
@@ -105,7 +69,7 @@ everyButton.forEach(item => {
         }
         else if(event.target.classList.contains("equals")) {
             displayValue = operate(operator, parseFloat(preNumber), parseFloat(curNumber));
-            display.textContent = displayValue;
+            display.textContent = Math.trunc(displayValue*100000000)/100000000;;
             curNumber = displayValue;
         }
         else if(event.target.classList.contains("clear")) {
