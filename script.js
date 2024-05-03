@@ -62,7 +62,6 @@ everyButton.forEach(item => {
             
         }
         else if(event.target.classList.contains("operator")) {
-            //display.textContent = parseFloat(curNumber);
             operator = event.target.textContent;
             preNumber = curNumber;
             curNumber = "";
@@ -71,6 +70,8 @@ everyButton.forEach(item => {
             displayValue = operate(operator, parseFloat(preNumber), parseFloat(curNumber));
             display.textContent = Math.trunc(displayValue*100000000)/100000000;;
             curNumber = displayValue;
+            curNumber = "";
+            console.log(displayValue);
         }
         else if(event.target.classList.contains("clear")) {
             curNumber = "";
