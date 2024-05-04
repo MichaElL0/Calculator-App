@@ -1,6 +1,7 @@
 let preNumber = 0;
-let curNumber = "";
+let curNumber = 0;
 let operator = "";
+let equalClicked = false;
 
 function add(num1, num2) {
     return num1 + num2;
@@ -45,41 +46,39 @@ const calculator = document.querySelector(".calculator");
 const everyButton = document.querySelectorAll(".button");
 let displayValue = 0;
 
-function resetDisplay() {
-    display.textContent = "0";
-    displayValue = "";
-}
-
 everyButton.forEach(item => {
     item.addEventListener("click", event => {
         if(event.target.classList.contains("digit")) {
             if(display.textContent.length <= 9) {
-                display.textContent = curNumber;
-                display.textContent += event.target.textContent;
-                curNumber += event.target.textContent;
-                console.log(curNumber);
+                display.textContent = parseFloat(curNumber);
+                //curNumber = 0;
+                displayValue += event.target.textContent;
+                display.textContent = parseFloat(displayValue);
+                curNumber = parseFloat(displayValue);
+                //curNumber += event.target.textContent;
             }
-            
+            //curNumber = parseFloat(curNumber);
         }
         else if(event.target.classList.contains("operator")) {
-            operator = event.target.textContent;
-            preNumber = curNumber;
-            curNumber = "";
+           
         }
         else if(event.target.classList.contains("equals")) {
-            displayValue = operate(operator, parseFloat(preNumber), parseFloat(curNumber));
-            display.textContent = Math.trunc(displayValue*100000000)/100000000;;
-            curNumber = displayValue;
-            curNumber = "";
-            console.log(displayValue);
+            if(display.textContent.length <= 9) {
+                displayValue = operate(operator, parseFloat(preNumber), parseFloat(curNumber));
+                display.textContent = Math.trunc(displayValue*100000000)/100000000;
+                //curNumber = displayValue;
+                preNumber = displayValue;
+                curNumber = 0;
+            }
         }
         else if(event.target.classList.contains("clear")) {
-            curNumber = "";
+            curNumber = 0;
             preNumber = 0;
             displayValue = "";
             operator = "";
             display.textContent = "0";
         }
+        console.log(`Current number: ${curNumber}, previous number: ${preNumber}, display value: ${displayValue}`);
     });
 });
 
