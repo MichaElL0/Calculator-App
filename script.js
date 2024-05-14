@@ -56,18 +56,23 @@ everyButton.forEach(item => {
     item.addEventListener("click", event => {
         if(event.target.classList.contains("digit")) {
             if(display.textContent.length <= 9) {
+                equalClicked = false;
                 curNumber += event.target.textContent;
                 display.textContent = parseFloat(curNumber);
+                
             }
         }
         else if(event.target.classList.contains("operator")) {
+            
             if(equalClicked == false && operator != preOperator) {
-                console.log("");
+                equalClicked = false;
+                console.log(typeof operator);
                 console.log("Clicked");
                 console.log(`Current number: ${curNumber}, previous number: ${preNumber} and operator: ${operator} and the previous operator: ${preOperator}.
-                    Equals sign clicked: ${equalClicked}`);
+                Equals sign clicked: ${equalClicked}`);
                 display.textContent = Math.trunc(operate(operator, parseFloat(preNumber), parseFloat(curNumber))*10000000)/10000000;
                 preNumber = operate(operator, parseFloat(preNumber), parseFloat(curNumber));
+                //curNumber = 0;
             }
             
             preOperator = operator;
@@ -75,7 +80,7 @@ everyButton.forEach(item => {
             preNumber = parseFloat(display.textContent);
             curNumber = 0;
             
-
+            
         }
         else if(event.target.classList.contains("equals")) {
             equalClicked = true;
@@ -84,12 +89,13 @@ everyButton.forEach(item => {
                 reset();
                 return;
             }
-            display.textContent = Math.trunc(operate(operator, parseFloat(preNumber), parseFloat(curNumber))*10000000)/10000000;
-            preNumber = parseFloat(display.textContent);
+            display.textContent = Math.trunc(operate(operator, parseFloat(preNumber), parseFloat(curNumber))*1000000)/1000000;
+            preNumber = Math.trunc(parseFloat(display.textContent)*100000000)/100000000;
             curNumber = 0;
             //preOperator = operator;
             operator = "";
-            equalClicked = false;
+            
+            
         }
         else if(event.target.classList.contains("clear")) {
             reset();
