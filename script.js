@@ -98,6 +98,11 @@ everyButton.forEach(item => {
                 display.textContent += ".";
             }
         }
+        else if(event.target.classList.contains("reverse")) {
+            let lastChar = display.textContent.charAt(display.textContent.length-1);
+            curNumber = display.textContent.replace(lastChar.toString(), "");
+            display.textContent = display.textContent.replace(lastChar.toString(), "");
+        }
         //console.log(`Current number: ${curNumber}, previous number: ${preNumber} and operator: ${operator} and the previous operator: ${preOperator}. Equals sign clicked: ${equalClicked}`);
     });
 });
