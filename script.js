@@ -59,53 +59,24 @@ everyButton.forEach(item => {
                 equalClicked = false;
                 curNumber += event.target.textContent;
                 display.textContent = parseFloat(curNumber);
-                
             }
         }
         else if(event.target.classList.contains("operator")) {
             equalClicked = false;
-            
-            // if(equalClicked == false && operator != preOperator) {
-            //     // preOperator = operator;
-            //     // operator = event.target.textContent;
-            //     console.log("clicked");
-            //     console.log(`Current number: ${curNumber}, previous number: ${preNumber} and operator: ${operator} and the previous operator: ${preOperator}.
-            //     Equals sign clicked: ${equalClicked}`);
-            //     display.textContent = Math.trunc(operate(operator, parseFloat(preNumber), parseFloat(curNumber))*10000000)/10000000;
-            //     //preNumber = operate(operator, parseFloat(preNumber), parseFloat(curNumber));
-            //     preNumber = parseFloat(display.textContent);
-            //     curNumber = 0;
-            // }
             preOperator = operator;
             operator = event.target.textContent;
             
             if(operator != "" && preOperator != "") {
-                // preOperator = operator;
-                // operator = event.target.textContent;
                 console.log("Chained");
-                // console.log(`Current number: ${curNumber}, previous number: ${preNumber} and operator: ${operator} and the previous operator: ${preOperator}.
-                // Equals sign clicked: ${equalClicked}`);
                 display.textContent = Math.trunc(operate(preOperator, parseFloat(preNumber), parseFloat(curNumber))*10000000)/10000000;
-                // //preNumber = operate(operator, parseFloat(preNumber), parseFloat(curNumber));
                 preNumber = parseFloat(display.textContent);
                 curNumber = 0;
             }
             else {
                 console.log("Normal");
-                // preOperator = operator;
-                // operator = event.target.textContent;
                 preNumber = parseFloat(display.textContent);
                 curNumber = 0;
             }
-
-            // preOperator = operator;
-            // operator = event.target.textContent;
-            // preNumber = parseFloat(display.textContent);
-            // curNumber = 0;
-
-            
-            
-            
         }
         else if(event.target.classList.contains("equals")) {
             equalClicked = true;
@@ -117,15 +88,18 @@ everyButton.forEach(item => {
             display.textContent = Math.trunc(operate(operator, parseFloat(preNumber), parseFloat(curNumber))*1000000)/1000000;
             preNumber = Math.trunc(parseFloat(display.textContent)*100000000)/100000000;
             curNumber = 0;
-            //preOperator = operator;
             operator = "";
-            
-            
         }
         else if(event.target.classList.contains("clear")) {
             reset();
         }
-        console.log(`Current number: ${curNumber}, previous number: ${preNumber} and operator: ${operator} and the previous operator: ${preOperator}. Equals sign clicked: ${equalClicked}`);
+        else if(event.target.classList.contains("dot")) {
+            if(!display.textContent.includes(".")) {
+                curNumber += ".";
+                display.textContent += ".";
+            }
+        }
+        //console.log(`Current number: ${curNumber}, previous number: ${preNumber} and operator: ${operator} and the previous operator: ${preOperator}. Equals sign clicked: ${equalClicked}`);
     });
 });
 
