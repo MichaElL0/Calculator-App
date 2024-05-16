@@ -93,7 +93,13 @@ everyButton.forEach(item => {
         else if(event.target.classList.contains("clear")) {
             reset();
         }
-        console.log(`Current number: ${curNumber}, previous number: ${preNumber} and operator: ${operator} and the previous operator: ${preOperator}. Equals sign clicked: ${equalClicked}`);
+        else if(event.target.classList.contains("dot")) {
+            if(!display.textContent.includes(".")) {
+                curNumber += ".";
+                display.textContent += ".";
+            }
+        }
+        //console.log(`Current number: ${curNumber}, previous number: ${preNumber} and operator: ${operator} and the previous operator: ${preOperator}. Equals sign clicked: ${equalClicked}`);
     });
 });
 
