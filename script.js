@@ -29,7 +29,6 @@ function operate(_operator, _num1, _num2) {
     }
 }
 
-//Make digit buttons work and appear on the display
 const display = document.querySelector(".display");
 const buttons = document.querySelectorAll(".digit");
 const clear = document.querySelector("#clear");
