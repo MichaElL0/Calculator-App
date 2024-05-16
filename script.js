@@ -1,7 +1,3 @@
-let number1 = 0;
-let number2 = 0;
-let operator = "";
-
 function add(num1, num2) {
     return num1 + num2;
 }
@@ -30,102 +26,116 @@ function operate(_operator, _num1, _num2) {
             return divide(_num1, _num2);
         default:
             return "No such operator";
-
     }
 }
-
 
 //Make digit buttons work and appear on the display
 const display = document.querySelector(".display");
-let displayValue = "";
 const buttons = document.querySelectorAll(".digit");
+const clear = document.querySelector("#clear");
+const operators = document.querySelectorAll(".operator");
+const equals = document.querySelector("#equals");
+const calculator = document.querySelector(".calculator");
+const everyButton = document.querySelectorAll(".button");
+let displayValue = 0;
+let preNumber = 0;
+let curNumber = 0;
+let operator = "";
+let preOperator = "";
+let equalClicked = false;
 
-function resetDisplay() {
-    display.textContent = "0";
+function reset() {
+    curNumber = 0;
+    preNumber = 0;
     displayValue = "";
+    operator = "";
+    display.textContent = "0";
 }
 
-//Make digit buttons work
-buttons.forEach(item => {
+everyButton.forEach(item => {
     item.addEventListener("click", event => {
-        if(displayValue.length >= 9) {
-            return;
+        if(event.target.classList.contains("digit")) {
+            if(display.textContent.length <= 9) {
+                equalClicked = false;
+                curNumber += event.target.textContent;
+                display.textContent = parseFloat(curNumber);
+                
+            }
         }
-        else {
-            display.textContent = "";
-            displayValue += event.target.textContent;
-            display.textContent = displayValue;
+        else if(event.target.classList.contains("operator")) {
+            equalClicked = false;
+            
+            // if(equalClicked == false && operator != preOperator) {
+            //     // preOperator = operator;
+            //     // operator = event.target.textContent;
+            //     console.log("clicked");
+            //     console.log(`Current number: ${curNumber}, previous number: ${preNumber} and operator: ${operator} and the previous operator: ${preOperator}.
+            //     Equals sign clicked: ${equalClicked}`);
+            //     display.textContent = Math.trunc(operate(operator, parseFloat(preNumber), parseFloat(curNumber))*10000000)/10000000;
+            //     //preNumber = operate(operator, parseFloat(preNumber), parseFloat(curNumber));
+            //     preNumber = parseFloat(display.textContent);
+            //     curNumber = 0;
+            // }
+            preOperator = operator;
+            operator = event.target.textContent;
+            
+            if(operator != "" && preOperator != "") {
+                // preOperator = operator;
+                // operator = event.target.textContent;
+                console.log("Chained");
+                // console.log(`Current number: ${curNumber}, previous number: ${preNumber} and operator: ${operator} and the previous operator: ${preOperator}.
+                // Equals sign clicked: ${equalClicked}`);
+                display.textContent = Math.trunc(operate(preOperator, parseFloat(preNumber), parseFloat(curNumber))*10000000)/10000000;
+                // //preNumber = operate(operator, parseFloat(preNumber), parseFloat(curNumber));
+                preNumber = parseFloat(display.textContent);
+                curNumber = 0;
+            }
+            else {
+                console.log("Normal");
+                // preOperator = operator;
+                // operator = event.target.textContent;
+                preNumber = parseFloat(display.textContent);
+                curNumber = 0;
+            }
+
+            // preOperator = operator;
+            // operator = event.target.textContent;
+            // preNumber = parseFloat(display.textContent);
+            // curNumber = 0;
+
+            
+            
+            
         }
+        else if(event.target.classList.contains("equals")) {
+            equalClicked = true;
+            if(curNumber == 0 || preNumber == 0 && operator == "/") {
+                alert("Don't break me... :(");
+                reset();
+                return;
+            }
+            display.textContent = Math.trunc(operate(operator, parseFloat(preNumber), parseFloat(curNumber))*1000000)/1000000;
+            preNumber = Math.trunc(parseFloat(display.textContent)*100000000)/100000000;
+            curNumber = 0;
+            //preOperator = operator;
+            operator = "";
+            
+            
+        }
+        else if(event.target.classList.contains("clear")) {
+            reset();
+        }
+        console.log(`Current number: ${curNumber}, previous number: ${preNumber} and operator: ${operator} and the previous operator: ${preOperator}. Equals sign clicked: ${equalClicked}`);
     });
 });
 
-
-//Make clear button work
-const clear = document.querySelector("#clear");
-clear.addEventListener("click", event => {
-    number1 = 0;
-    number2 = 0;
-    operator = "";
-    resetDisplay();
-});
-
-
-//Make operator buttons work
-const operators = document.querySelectorAll(".operator");
-operators.forEach(item => {
-    item.addEventListener("click", event => {
-        operator = event.target.textContent;
-        number1 = parseFloat(Math.trunc(displayValue*100000000)/100000000);
-        displayValue = "";
-    });
-});
-
-
-//Make equals button work
-const equals = document.querySelector("#equals");
-
-equals.addEventListener("click", event => {
-    number2 = parseFloat(Math.trunc(displayValue*100000000)/100000000);
-    
-    if((number1 == 0 || number2 == 0) && operator == "/") {
-        alert("Don't break me... :(");
-        resetDisplay();
-        return;
-    }
-    else if(operator == "") {
-        console.log("shit");
-        return;
-    }
-
-    displayValue = Math.trunc(operate(operator, number1, number2)*100000000)/100000000; ;
-    display.textContent = displayValue;//Math.trunc(displayValue*100000000)/100000000;
-
-    // if(displayValue.toString().length >= 9) {
-    //     console.log(true);
-    //     console.log(displayValue);
-    //     display.textContent = Math.trunc(displayValue*100000000)/100000000;
-    //     number1 = displayValue;
-    // }
-    // else {
-    //     display.textContent = displayValue;
-    //     console.log(displayValue);
-    //     console.log("Normal output");
-    //     number1 = displayValue;
-    // }
-
-    //display.textContent = displayValue;
-    // console.log(displayValue);
-    // console.log("Normal output");
-    number1 = Math.trunc(displayValue*100000000)/100000000;
-
-    displayValue = "";
-});
 
 //Make box shadow effect
-const calculator = document.querySelector(".calculator");
 document.body.addEventListener("mousemove", event => {
     let xAxis = event.pageX * 0.02;
     let yAxis = event.pageY * 0.02;
 
     calculator.style.boxShadow = `${xAxis}px ${yAxis}px #c481c0`;
 });
+
+//Math.trunc(value*100000000)/100000000; round number to 8 digits after comma
